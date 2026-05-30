@@ -1,27 +1,24 @@
-import sys
 import os
+import subprocess
 
-# Try using winsound (built-in on Windows, no installation needed)
+sound_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'sounds', 'notification.mp3')
+
 try:
-    import winsound
-    sound_path = os.path.join(os.path.dirname(__file__), 'sounds', 'notification.mp3')
+    # Convert Linux WSL path to Windows path (e.g. /home/user/... -> \\wsl$\Ubuntu\home\user\...)
+    win_path = subprocess.check_output(['wslpath', '-w', sound_path], text=True).strip()
 
-    # winsound only works with WAV files, so we'll use an alternative
-    # Use Windows API to play sound without visible player
-    import subprocess
-
-    # This PowerShell command plays sound without opening Windows Media Player window
     ps_command = f'''
     Add-Type -AssemblyName presentationCore
     $mediaPlayer = New-Object System.Windows.Media.MediaPlayer
-    $mediaPlayer.Open([uri]::new("{sound_path}"))
+    $mediaPlayer.Open([uri]::new("{win_path}"))
     $mediaPlayer.Play()
-    Start-Sleep -Milliseconds 1500
+    Start-Sleep -Milliseconds 5000
     $mediaPlayer.Close()
     '''
 
-    subprocess.run(['powershell', '-WindowStyle', 'Hidden', '-Command', ps_command],
-                   creationflags=subprocess.CREATE_NO_WINDOW)
-except Exception as e:
-    # Silently fail if there's an issue
+    subprocess.run(
+        ['powershell.exe', '-WindowStyle', 'Hidden', '-Command', ps_command],
+        timeout=7
+    )
+except Exception:
     pass

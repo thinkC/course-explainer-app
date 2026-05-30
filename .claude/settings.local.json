@@ -20,5 +20,30 @@
   },
   "enabledPlugins": {
     "code-review@claude-plugins-official": true
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "TodoWrite",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \".claude/play_sound.py\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \".claude/play_sound.py\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
   }
 }
