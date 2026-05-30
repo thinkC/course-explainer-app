@@ -1,5 +1,18 @@
-{% extends 'layout.html' %} {% block title %}{{ course_id }} – Course
-Explainer{% endblock %} {% block content %}
-<h1>Course Details</h1>
-<p>Showing details for course {{ course_id }}.</p>
+{% extends 'layout.html' %}
+
+{% block title %}{{ course.title }} – Course Explainer{% endblock %}
+
+{% block content %}
+<h1>{{ course.title }}</h1>
+<p><strong>Instructor:</strong> {{ course.instructor }}</p>
+<p><strong>Duration:</strong> {{ course.duration }}</p>
+<p>{{ course.description }}</p>
+{% if course.topics %}
+<h2>Topics</h2>
+<ul>
+    {% for topic in course.topics %}
+    <li>{{ topic }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 {% endblock %}

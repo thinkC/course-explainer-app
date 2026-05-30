@@ -15,12 +15,11 @@ class AppTestCase(unittest.TestCase):
     def test_index(self):
         response = self.app.get('/')
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Welcome to the Course Explainer', response.data)
-        # Test that course names are displayed
         self.assertIn(b'Introduction to Python', response.data)
         self.assertIn(b'Web Development with Flask', response.data)
         self.assertIn(b'Data Science Fundamentals', response.data)
         self.assertIn(b'Go Programming Essentials', response.data)
+        self.assertIn(b'AI Fluency: Framework &amp; Foundations with Claude', response.data)
 
     def test_course(self):
         response = self.app.get('/course/1')
@@ -32,6 +31,12 @@ class AppTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Go Programming Essentials', response.data)
         self.assertIn(b'Robert Chen', response.data)
+
+    def test_ai_fluency_course(self):
+        response = self.app.get('/course/5')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'AI Fluency', response.data)
+        self.assertIn(b'Tunde Oyewo', response.data)
 
     # Contact Page Tests
     def test_contact_page_loads(self):

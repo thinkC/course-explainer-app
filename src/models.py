@@ -18,4 +18,6 @@ courses = [
            ["Statistics Basics", "Python for Data Science", "Data Visualization", "Machine Learning Introduction"]),
     Course("Go Programming Essentials", "Master Go programming language from basics to advanced concepts.", "Robert Chen", "5 weeks",
            ["Go Basics and Syntax", "Goroutines and Concurrency", "Channels and Synchronization", "Web Services with Go", "Testing and Deployment"]),
+    Course("AI Fluency: Framework & Foundations with Claude", "Build practical AI literacy and learn to work effectively with Claude across real-world tasks.", "Tunde Oyewo", "4 weeks",
+           ["AI Concepts and Mental Models", "Prompting Strategies", "Claude API Integration", "Building AI-Assisted Workflows"]),
 ]
