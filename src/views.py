@@ -25,7 +25,7 @@ def contact():
         # Server-side validation
         errors = {}
 
-        if not name1:
+        if not name:
             errors['name'] = 'Please enter your name'
 
         if not email:
